@@ -1,5 +1,6 @@
 // import './App.css'
 import SearchBox from './SearchBox'
+import InfoBox from './InfoBox';
 
 function App() {
 
@@ -7,6 +8,7 @@ function App() {
     <>
       <div>
         <SearchBox/>
+        <InfoBox/>
       </div>
     </>
   )
