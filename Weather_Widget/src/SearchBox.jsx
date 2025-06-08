@@ -7,7 +7,7 @@ import { useState } from 'react';
 // https://home.openweathermap.org
 // API -> https://api.openweathermap.org/data/2.5/weather?q={city name}&appid={API key}
 
-export default function SearchBox(){
+export default function SearchBox({updateInfo}){
     let [city, setCity] = useState("");
 
 
@@ -31,6 +31,7 @@ export default function SearchBox(){
             weather: jsonResponse.weather[0].description
         }
         console.log(result);
+        return result;
     }
 
 
@@ -38,17 +39,17 @@ export default function SearchBox(){
         setCity(event.target.value);
     }
 
-    let handleSubmit =(event)=>{
+    let handleSubmit = async (event)=>{
         event.preventDefault();
         console.log(city);
         setCity("");
-        getInfo();
+        let info = await getInfo();
+        updateInfo(info)
     }
 
     return(
         <>
             <div className="SearchBox">
-                <h1>Search for the weather</h1>
                 <form onSubmit={handleSubmit}>
                     <TextField id="city" label="City Name" variant="outlined" required value={city} onChange={handleChange} />
                     <br /><br />
